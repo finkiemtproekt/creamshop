@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body style="background: #0f3d81">
+<th:block xmlns:th="http://www.thymeleaf.org">
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1 class="jumbotron-heading">cream SHOP</h1>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <form action="/cream/add" method="POST">
+                    <input id="id" type="hidden" name="id" th:value="(${product} != null ? ${product.getCream_id()} : '')">
+                    <div class="form-group">
+                        <label for="cream_name">Product name</label>
+                        <input type="text"
+                               class="form-control"
+                               id="cream_name"
+                               name="cream_name"
+                               th:value="(${product} != null ? ${product.getName()} : '')"
+                               required
+                               placeholder="Enter product name">
+                    </div>
+                    <div class="form-group">
+                        <label for="cream_year">Cream Year</label>
+                        <input type="text"
+                               class="form-control"
+                               id="cream_year"
+                               name="cream_year"
+                               th:value="(${product} != null ? ${product.getYear()} : '')"
+                               placeholder="Price">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Firm</label>
+                        <select name="firm_id" class="form-control">
+                            <option th:if="${product} != null"
+                                    th:selected="${product.getFirm() != null &&
+                                product.getFirm().getFirm_id() == firm.getFirm_id()}"
+                                    th:each="firm : ${firm}"
+                                    th:value="${firm.getFirm_id()}"
+                                    th:text="${firm.getFirm_name()}">
+                            </option>
+                            <option th:if="${product} == null"
+                                    th:each="firm : ${firm}"
+                                    th:value="${firm.getFirm_id()}"
+                                    th:text="${firm.getFirm_name()}">
+                            </option>
+                        </select>
+                    </div>
+                    <button id="submit" type="submit" class="btn btn-primary">Submit</button>
+                    <a type="button" class="btn btn-primary" href="/cream">Back</a>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</th:block>
+
+</body>
+</html>
